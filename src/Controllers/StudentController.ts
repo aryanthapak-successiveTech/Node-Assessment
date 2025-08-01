@@ -5,7 +5,7 @@ import {
   addStudent,
   updateStudent,
   deleteStudent,
-  betweenAgeData
+  betweenAgeData,
 } from "../Services/StudentService";
 
 export const getStudents = async (
@@ -89,25 +89,20 @@ export const deleteStudentDetails = async (
   }
 };
 
-
-export const getAgeBasedStudent=async (
+export const getAgeBasedStudent = async (
   req: Request,
   res: Response,
   next: NextFunction
-)=> {
-    try{
-        const minAge=Number(req.query.minAge);
-    const maxAge=Number(req.query.maxAge);
-    const studentData=await betweenAgeData(minAge,maxAge);
+) => {
+  try {
+    const minAge = Number(req.query.minAge);
+    const maxAge = Number(req.query.maxAge);
+    const studentData = await betweenAgeData(minAge, maxAge);
     return res.status(200).json({
-        status:"Success",
-        data:studentData
-    })
-    }
-
-    catch(err){
-        next(err);
-    }
-    
-
-}
+      status: "Success",
+      data: studentData,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
