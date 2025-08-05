@@ -6,6 +6,7 @@ import {
   updateStudent,
   deleteStudent,
   betweenAgeData,
+  ageStats,
 } from "../Services/StudentService";
 
 export const getStudents = async (
@@ -65,7 +66,7 @@ export const updatedStudentDetails = async (
   next: NextFunction
 ) => {
   try {
-    const studentId = req.query.id as string;
+    const studentId = req.params.id as string;
     const studentData = await updateStudent(studentId, req.body);
     return res.status(200).json({
       status: "Sucess",
@@ -82,8 +83,11 @@ export const deleteStudentDetails = async (
   next: NextFunction
 ) => {
   try {
-    const studentId = req.query.id as string;
+    const studentId = req.params.id as string;
     await deleteStudent(studentId);
+    res.status(200).json({
+      message:"Success"
+    })
   } catch (err) {
     next(err);
   }
@@ -95,6 +99,7 @@ export const getAgeBasedStudent = async (
   next: NextFunction
 ) => {
   try {
+    console.log(req.query);
     const minAge = Number(req.query.minAge);
     const maxAge = Number(req.query.maxAge);
     const studentData = await betweenAgeData(minAge, maxAge);
@@ -106,3 +111,20 @@ export const getAgeBasedStudent = async (
     next(err);
   }
 };
+
+export const getAgeStats= async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+)=>{
+  try{
+    const studentDataStats=await ageStats();
+    return res.status(200).json({
+      status:"Success",
+      data:studentDataStats
+    })
+  }
+  catch(err){
+    next(err);
+  }
+}

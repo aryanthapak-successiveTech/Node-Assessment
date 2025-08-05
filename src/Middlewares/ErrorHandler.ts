@@ -13,7 +13,7 @@ export const HandleApiError=(error:ApiError,req:Request,res:Response,next:NextFu
     const message=error.message||"Something went wrong";
     console.log(error.stack);
     return res.status(statusCode).json({
-        status:"Sucess",
+        status:"Failed",
         message:message
     })
 }

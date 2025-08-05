@@ -4,6 +4,7 @@ import { config } from "dotenv";
 import cors from "cors"
 import { HandleApiError } from "./Middlewares/ErrorHandler";
 import studentRouter from "./Routes/StudentRoutes"
+import userRouter from "./Routes/UserRoutes";
 
 config();
 const app=express();
@@ -19,8 +20,10 @@ mongoose.connect(connectionUrl).then(()=>{
 })
 
 app.use("/students",studentRouter);
-
+app.use("/user",userRouter);
 app.use(HandleApiError);
+
 app.listen(PORT,()=>{
     console.log(`Server is listening on ${PORT}`);
 })
+

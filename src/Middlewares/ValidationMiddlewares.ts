@@ -15,6 +15,7 @@ export const validateStudent=(req:Request,res:Response,next:NextFunction)=>{
         if(error){
             throw new ApiError(400,error.message)
         }
+        next();
     }
     catch(err){
         next(err);
