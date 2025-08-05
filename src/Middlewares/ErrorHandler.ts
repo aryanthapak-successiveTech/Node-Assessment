@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 export class ApiError extends Error{
     statusCode;
     constructor(statusCode:number,message:string){
-        super();
+        super(message);
         this.statusCode=statusCode;
     }
 }

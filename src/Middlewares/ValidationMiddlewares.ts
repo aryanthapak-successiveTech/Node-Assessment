@@ -13,7 +13,7 @@ export const validateStudent=(req:Request,res:Response,next:NextFunction)=>{
     try{
         const {error}=studentSchema.validate(req.body);
         if(error){
-            throw new ApiError(400,error.message)
+           next(new ApiError(400,error.message))
         }
         next();
     }
